@@ -1,4 +1,4 @@
-package checker.area.geofence.geofenceareacheker
+package checker.area.geofence.geofenceareacheker.view
 
 import android.Manifest
 import android.annotation.TargetApi
@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.v4.content.ContextCompat
 import android.widget.Toast
+import checker.area.geofence.geofenceareacheker.R
 
 class MainActivity : AppCompatActivity() {
 
