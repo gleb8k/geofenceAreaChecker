@@ -2,6 +2,7 @@ package checker.area.geofence.geofenceareacheker.view
 
 import android.Manifest
 import android.annotation.TargetApi
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
@@ -11,6 +12,10 @@ import android.support.annotation.CallSuper
 import android.support.v4.content.ContextCompat
 import android.widget.Toast
 import checker.area.geofence.geofenceareacheker.R
+import checker.area.geofence.geofenceareacheker.viewmodel.GeofenceViewModel
+import android.arch.lifecycle.ViewModelProviders
+import android.support.annotation.Nullable
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,15 +29,18 @@ class MainActivity : AppCompatActivity() {
         val TAG = "WiFiAnalyzer"
     }
 
+    private var geofenceViewModel: GeofenceViewModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        geofenceViewModel = ViewModelProviders.of(this).get(GeofenceViewModel::class.java)
     }
 
     @TargetApi(Build.VERSION_CODES.M)
     override fun onStart() {
         if (hasPermissions(this, *REQUIRED_PERMISSIONS)) {
-            //
+            checkArea()
         } else {
             requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_REQUIRED_PERMISSIONS)
         }
@@ -44,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == REQUEST_CODE_REQUIRED_PERMISSIONS) {
             if (onPermissionResult(grantResults)) {
-                //
+                checkArea()
             }
             else {
                 recreate()
@@ -70,5 +78,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    private fun checkArea() {
+        geofenceViewModel.statusLiveData.observe(this, object : Observer<String> {
+            fun onChanged(@Nullable status: String) {
+                //updateUI(status)
+            }
+        })
     }
 }

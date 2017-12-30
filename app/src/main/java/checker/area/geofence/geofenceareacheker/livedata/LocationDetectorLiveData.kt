@@ -11,7 +11,7 @@ import android.os.Bundle
 /**
  * Created by Gleb on 12/29/17.
  */
-class LocationDetectorLiveData(var context:Context): LiveData<Boolean>(), LocationListener {
+class LocationDetectorLiveData(var context:Context): LiveData<Location>(), LocationListener {
 
     companion object {
         private val LOCATION_INTERVAL = 1000L
@@ -19,9 +19,6 @@ class LocationDetectorLiveData(var context:Context): LiveData<Boolean>(), Locati
     }
 
     private val locationManager: LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-    var locationArea: Location? = null
-    var radiusArea: Float = 0f
 
     override fun onInactive() {
         locationManager.removeUpdates(this)
@@ -34,7 +31,7 @@ class LocationDetectorLiveData(var context:Context): LiveData<Boolean>(), Locati
     }
 
     override fun onLocationChanged(location: Location?) {
-        value = isInArea(location!!)
+        value = location
     }
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
@@ -49,8 +46,4 @@ class LocationDetectorLiveData(var context:Context): LiveData<Boolean>(), Locati
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun isInArea(currentLocation: Location): Boolean {
-        val distance = locationArea!!.distanceTo(currentLocation)
-        return distance <= radiusArea
-    }
 }

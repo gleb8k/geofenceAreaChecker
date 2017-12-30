@@ -19,16 +19,14 @@ import android.net.ConnectivityManager
 /**
  * Created by Gleb on 12/29/17.
  */
-class WiFiAnalyzerLiveData(var context: Context): LiveData<Boolean>() {
+class WiFiAnalyzerLiveData(var context: Context): LiveData<String>() {
 
     private var wifiManager: WifiManager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
     private var connectionManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    var networkName: String = "HR"
-
     private var broadCastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-             value = checkWifiConnection(networkName)
+             value = getWifiConnectedName()
         }
     }
 
@@ -51,11 +49,11 @@ class WiFiAnalyzerLiveData(var context: Context): LiveData<Boolean>() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun checkWifiConnection(name: String): Boolean {
+    private fun getWifiConnectedName(): String {
         if (connectionManager.activeNetworkInfo.isConnected)  {
-            return name == wifiManager.connectionInfo.ssid
+            return wifiManager.connectionInfo.ssid
         }
-        return true
+        return ""
     }
 
 }
