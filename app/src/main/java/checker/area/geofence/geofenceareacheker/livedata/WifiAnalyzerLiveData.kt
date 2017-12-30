@@ -48,7 +48,6 @@ class WiFiAnalyzerLiveData(var context: Context): LiveData<String>() {
 
     }
 
-    @SuppressLint("MissingPermission")
     private fun getWifiConnectedName(): String {
         if (connectionManager.activeNetworkInfo.isConnected)  {
             return wifiManager.connectionInfo.ssid

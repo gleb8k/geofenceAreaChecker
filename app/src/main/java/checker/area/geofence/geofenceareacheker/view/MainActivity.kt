@@ -1,6 +1,7 @@
 package checker.area.geofence.geofenceareacheker.view
 
 import android.Manifest
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.TargetApi
 import android.arch.lifecycle.Observer
 import android.content.Context
@@ -15,15 +16,18 @@ import checker.area.geofence.geofenceareacheker.R
 import checker.area.geofence.geofenceareacheker.viewmodel.GeofenceViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.support.annotation.Nullable
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
         val REQUIRED_PERMISSIONS = arrayOf(
+                Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.ACCESS_WIFI_STATE,
                 Manifest.permission.CHANGE_WIFI_STATE,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION)
 
         val REQUEST_CODE_REQUIRED_PERMISSIONS = 100
         val TAG = "WiFiAnalyzer"
@@ -34,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        geofenceViewModel = ViewModelProviders.of(this).get(GeofenceViewModel::class.java)
+        update_config_btn.setOnClickListener { updateConfig() }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -81,10 +85,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkArea() {
-        geofenceViewModel.statusLiveData.observe(this, object : Observer<String> {
-            fun onChanged(@Nullable status: String) {
-                //updateUI(status)
-            }
+        geofenceViewModel = ViewModelProviders.of(this).get(GeofenceViewModel::class.java)
+        geofenceViewModel!!.statusLiveData.observe(this, Observer<String> {
+            geofence_area_state.text = it
         })
+    }
+
+    private fun updateConfig() {
+        val networkName = network_name.text.toString()
+        val radius = area_radius.text.toString().toFloatOrNull() ?: -1f
+        val latitude = area_latitude.text.toString().toDoubleOrNull() ?: 0.0
+        val longitude = area_longitude.text.toString().toDoubleOrNull() ?: 0.0
+        geofenceViewModel!!.updateConfig(networkName, latitude, longitude, radius)
     }
 }

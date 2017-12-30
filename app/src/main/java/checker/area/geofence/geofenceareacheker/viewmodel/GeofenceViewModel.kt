@@ -11,6 +11,7 @@ import android.support.annotation.Nullable
 import checker.area.geofence.geofenceareacheker.livedata.LocationDetectorLiveData
 import checker.area.geofence.geofenceareacheker.livedata.WiFiAnalyzerLiveData
 import checker.area.geofence.geofenceareacheker.model.GeofenceState
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by Gleb on 12/29/17.
@@ -27,21 +28,9 @@ class GeofenceViewModel(application: Application) : AndroidViewModel(application
     private var point: Location = Location("geofence point")
     private var pointRadius: Float = -1f
 
-    private val locationObserver = object : Observer<Location> {
-        fun onChanged(@Nullable location: Location) {
-            checkArea()
-        }
-    }
-    private val networkObserver = object : Observer<String> {
-        fun onChanged(@Nullable s: String) {
-            checkArea()
-        }
-    }
-    private val mediatorStatusObserver = object : Observer<GeofenceState> {
-        fun onChanged(@Nullable state: GeofenceState) {
-            statusLiveData.value = state.toString()
-        }
-    }
+    private val locationObserver = Observer<Location> { checkArea() }
+    private val networkObserver = Observer<String> { checkArea() }
+    private val mediatorStatusObserver = Observer<GeofenceState> { statusLiveData.value = it.toString() }
 
     init {
         mediatorLiveData.addSource(locationLiveData, locationObserver)
@@ -65,6 +54,13 @@ class GeofenceViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    fun updateConfig(networkName: String, pointLatitude: Double, pointLongitude: Double, pointRadius: Float) {
+        this.networkName = networkName
+        this.pointRadius = pointRadius
+        this.point.latitude = pointLatitude
+        this.point.longitude = pointLongitude
+        checkArea()
+    }
     private fun isConnectedToCurrentNetwork(): Boolean {
         if (wifiLiveData.value == null || networkName.isEmpty()) {
             return false
