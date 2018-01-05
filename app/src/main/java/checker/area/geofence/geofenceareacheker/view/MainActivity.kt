@@ -1,21 +1,18 @@
 package checker.area.geofence.geofenceareacheker.view
 
 import android.Manifest
-import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.annotation.TargetApi
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import checker.area.geofence.geofenceareacheker.R
 import checker.area.geofence.geofenceareacheker.viewmodel.GeofenceViewModel
-import android.arch.lifecycle.ViewModelProviders
-import android.support.annotation.Nullable
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -41,13 +38,8 @@ class MainActivity : AppCompatActivity() {
         update_config_btn.setOnClickListener { updateConfig() }
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     override fun onStart() {
-        if (hasPermissions(this, *REQUIRED_PERMISSIONS)) {
-            checkArea()
-        } else {
-            requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_REQUIRED_PERMISSIONS)
-        }
+        checkPermission()
         super.onStart()
     }
 
@@ -63,6 +55,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    fun checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (hasPermissions(this, *REQUIRED_PERMISSIONS)) {
+                checkArea()
+            } else {
+                requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_REQUIRED_PERMISSIONS)
+            }
+        }
+        else {
+            checkArea()
+        }
     }
 
     fun onPermissionResult(grantResult: IntArray): Boolean {

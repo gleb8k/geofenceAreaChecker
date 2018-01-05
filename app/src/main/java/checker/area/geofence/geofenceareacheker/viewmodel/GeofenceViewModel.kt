@@ -6,19 +6,15 @@ import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.location.Location
-import android.net.wifi.WifiConfiguration
-import android.support.annotation.Nullable
 import checker.area.geofence.geofenceareacheker.livedata.LocationDetectorLiveData
 import checker.area.geofence.geofenceareacheker.livedata.WiFiAnalyzerLiveData
 import checker.area.geofence.geofenceareacheker.model.GeofenceState
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by Gleb on 12/29/17.
  */
 class GeofenceViewModel(application: Application) : AndroidViewModel(application) {
 
-    //constructor(application: Application) : super(application)
     private var locationLiveData: LocationDetectorLiveData = LocationDetectorLiveData(application)
     private var wifiLiveData: WiFiAnalyzerLiveData = WiFiAnalyzerLiveData(application)
     private var mediatorLiveData: MediatorLiveData<GeofenceState> = MediatorLiveData()

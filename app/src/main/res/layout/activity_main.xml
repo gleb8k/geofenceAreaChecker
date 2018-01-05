@@ -9,11 +9,13 @@
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/network_name"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/wifi_network_name"
+        android:lines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.169"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,12 +23,12 @@
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/area_radius"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
         android:inputType="numberDecimal"
+        android:hint="@string/are_point_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.169"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,12 +36,12 @@
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/area_latitude"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
         android:inputType="numberDecimal"
+        android:hint="@string/are_point_latitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.169"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,12 +49,12 @@
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/area_longitude"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
         android:inputType="numberDecimal"
+        android:hint="@string/are_point_longitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.169"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,22 +68,28 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:text="@string/update_config_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.169"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/area_longitude"
-        app:layout_constraintVertical_bias="0.072"/>
+        app:layout_constraintVertical_bias="0.5"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/geofence_area_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="State"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/update_config_btn"
-        app:layout_constraintVertical_bias="0.428"/>
+        app:layout_constraintStart_toEndOf="@+id/update_config_btn"
+        app:layout_constraintTop_toBottomOf="@+id/area_longitude"
+        app:layout_constraintVertical_bias="0.5"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">geofenceAreaCheker</string>
+
+    <string name="wifi_network_name">WiFi network name</string>
+    <string name="are_point_radius">Geofence area radius</string>
+    <string name="are_point_latitude">Geofence area latitude</string>
+    <string name="are_point_longitude">Geofence area longitude</string>
+    <string name="update_config_btn">Update config</string>
 </resources>
