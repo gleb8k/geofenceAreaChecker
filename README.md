@@ -20,5 +20,4 @@ $ https://github.com/gleb8k/geofenceAreaChecker.git
 ```
 
 ## screens
-![alt text](https://github.com/gleb8k/geofenceAreaChecker/images/screen.jpg)
-<img src="https://github.com/gleb8k/geofenceAreaChecker/images/screen.jpg"/>
+![screen](https://user-images.githubusercontent.com/34940037/34617050-c0796c9a-f242-11e7-8bae-07ce4310426b.jpg)
