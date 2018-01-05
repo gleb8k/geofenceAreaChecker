@@ -1,6 +1,6 @@
 # geofenceAreaChecker
 
-This is a sample app which check current status of your device: inside of geofence area OR outside of area.
+This is an Android sample app which check current status of your device: inside of geofence area OR outside of area.
 
 Geofence area is defined as a combination of some geographic point, radius, and specific Wifi network name.
 A device is considered to be inside of the geofence area if the device is connected to the specified WiFi network
