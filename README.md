@@ -19,5 +19,19 @@ As usual, you get started by cloning the project to your local machine:
 $ https://github.com/gleb8k/geofenceAreaChecker.git
 ```
 
-## screens
+## Edit geofence area
 ![screen](https://user-images.githubusercontent.com/34940037/34617050-c0796c9a-f242-11e7-8bae-07ce4310426b.jpg)
+
+## There 4 editText fields:
+### - Wifi network name
+      wifi network, which can be connected in your geofence area;
+### - Geofence area radius
+      geographic area radius(in meters)
+### - Geofence area lattitude
+      geographic point lattitude
+### - Geofence area longitude
+      geographic point longitude
+
+You can apply your configuration by click on button "Update config"
+and see the actual status message of your device: "Inside" or "Outside"
+
